@@ -3,6 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.space.app.dao.UserMapper">
+    <select id="select" resultType="UserDTO">
+        SELECT * FROM user_info WHERE id = #{id};
+    </select>
     <insert id="insert" parameterType="UserDTO">
         INSERT user_info (id, pw, name, email, birth)
         VALUES (#{id}, #{pw}, #{name}, #{email}, #{birth});

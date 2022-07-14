@@ -13,6 +13,10 @@ public class UserDAOImpl implements UserDAO {
     private SqlSession session;
     private static String user = "com.space.app.dao.UserMapper.";
 
+    @Override
+    public UserDTO select(String id) { return session.selectOne(user + "select", id); }
+
+    @Override
     public int insert(UserDTO userDTO) {
         return session.insert(user + "insert", userDTO);
     }

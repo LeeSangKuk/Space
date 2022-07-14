@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
     @Autowired
     UserDAO userDAO;
-
+    @Override
+    public UserDTO selectUser(String id)  { return userDAO.select(id); }
+    @Override
     public int register(UserDTO userDTO) { return userDAO.insert(userDTO); }
 }

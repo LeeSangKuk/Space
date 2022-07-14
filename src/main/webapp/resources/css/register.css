@@ -52,7 +52,7 @@ label, input {
 .main-lineout {
     width: 60%;
     height: 720px;
-    margin: 115px auto;
+    margin: 25% auto;
     border: solid 5px burlywood;
     text-align: center;
 }
@@ -83,9 +83,9 @@ label, input {
 .main-lineout input {
     width:40%;
     height: 5%;
-    padding: 5px;
+    padding: 7px;
     margin-bottom: 3%;
-    font-size: larger;
+    font-size: large;
     font-weight: bolder;
     box-sizing: border-box;
     border-color: brown;
@@ -96,4 +96,9 @@ label, input {
     width: 20%;
     height: 8%;
     margin: 2% auto;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: lightgreen;
+    cursor: pointer;
 }
