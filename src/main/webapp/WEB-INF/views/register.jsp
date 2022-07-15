@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false"%>
-<%@ page import="java.net.URLDecoder"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +14,28 @@
 </head>
     <body>
     <div id="wrap"><!--wrap/start-->
+        <header id="header"><!--header/start-->
+            <nav class="nav"><!--nav/start-->
+                <h1 class="main-logo">
+                    <a class="main-logo-img" href="<c:url value="/"/>"></a>
+                </h1><!--.main-logo-->
+                <div class="nav-list">
+                    <div class="nav-git">
+                        <a class="nav-git-adr" href="https://github.com/LeeSangKuk/mySpace.git">https://github.com/LeeSangKuk/mySpace.git</a>
+                    </div><!--.nav-git-->
+                    <div class="nav-info">
+                        <ul class="nav-info-list">
+                            <li class="nav-user">
+                                접속된 계정 :
+                                <span class="nav-user-name">${loginId}</span>
+                            </li>
+                            <li class="nav-user-login"><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+                            <li class="nav-user-join"><a href="<c:url value='/login/join'/>">회원가입</a></li>
+                        </ul><!--.nav-info-list-->
+                    </div><!--.nav-info-->
+                </div><!--nav-list-->
+            </nav><!--nav/end-->
+        </header><!--header/end-->
         <section class="main-join"><!--.main-join/start-->
             <form:form modelAttribute="userDTO" action="${pageContext.request.contextPath}/login/join" method="POST">
                 <div class="main-lineout">

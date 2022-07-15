@@ -12,14 +12,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value='/css/loginForm.css'/>">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-    <title>HOME</title>
+    <title>LOGIN</title>
 </head>
 <body>
 <div id="wrap">
     <header id="header"><!--header/start-->
         <nav class="nav"><!--nav/start-->
             <h1 class="main-logo">
-                <a class="main-logo-img" href="#"></a>
+                <a class="main-logo-img" href="<c:url value="/"/>"></a>
             </h1><!--.main-logo-->
             <div class="nav-list">
                 <div class="nav-git">

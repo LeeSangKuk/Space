@@ -31,11 +31,6 @@ img{
     height: auto;
 }
 
-label, input {
-    display: block;
-    margin: 0 auto;
-}
-
 #wrap {
     position: relative;
     width: 100%;
@@ -43,8 +38,8 @@ label, input {
 }
 
 #header {
-    position: fixed;
-    top: 0px;
+    position: absolute;
+    top: 0;
     left: 0px;
     width: 100%;
     height: 85px;
@@ -111,63 +106,43 @@ label, input {
     color: brown;
 }
 
-.main-join {
-    width: 1240px;
-    height: auto;
-    margin: 0 auto;
+/* =====================header end======================= */
+
+#container {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1280px;
+    padding: 20px;
+    margin-left: -640px;
     box-sizing: border-box;
+    /* background-color: burlywood; */
 }
 
-.main-lineout {
-    width: 60%;
-    height: 720px;
-    margin: 25% auto;
-    border: solid 5px burlywood;
-    text-align: center;
-}
-
-.main-join-title {
-    padding: 5%;
-    font-size: 2.5rem;
-}
-
-.main-join-title>a {
-    color: brown;
-}
-
-.main-lineout label {
-    margin-bottom: 2%;
-    margin-left: 30%;
-    text-align: left;
-    font-size: large;
-    font-weight: bolder;
-    color: green;
-}
-
-.main-lineout label span {
-    font-weight: bolder;
-    color: red;
-}
-
-.main-lineout input {
-    width:40%;
-    height: 5%;
-    padding: 7px;
-    margin-bottom: 3%;
-    font-size: large;
-    font-weight: bolder;
+#container > div {
+    width: 580px;
+    height: 400px;
+    margin: 20px auto;
+    padding: 30px;
     box-sizing: border-box;
-    border-color: brown;
-    border-radius: 5px;
+    background-color: gray;
 }
 
-.join-btn {
-    width: 20%;
-    height: 8%;
-    margin: 2% auto;
-    font-size: larger;
-    font-weight: bold;
-    border-radius: 10px;
-    background-color: lightgreen;
-    cursor: pointer;
+.section1 {
+    background-image: url(../img/CRUD.jpg);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section1 a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#container > div:hover {
+    border: 5px solid brown;
 }

@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/login")
@@ -69,7 +68,6 @@ public class LoginController {
         if(!loginCheck(id, pw)) {
             // 2-1   일치하지 않으면, loginForm으로 이동
             m.addAttribute("msg", "회원정보가 일치하지 않습니다");
-//            String msg = URLEncoder.encode("회원정보가 일치하지 않습니다.", "utf-8");
             return "redirect:/login/login";
         }
 
@@ -81,7 +79,7 @@ public class LoginController {
         if(rememberId){
             Cookie cookie = new Cookie("id", id);
             response.addCookie(cookie);
-        } else if(rememberId==false){
+        } else {
             // 체크박스가 false일 경우 쿠키의 유효기간을 0으로 변경(폐기).
             Cookie cookie = new Cookie("id", id);
             cookie.setMaxAge(0);
