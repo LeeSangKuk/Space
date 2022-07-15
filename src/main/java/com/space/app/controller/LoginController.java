@@ -6,6 +6,7 @@ import com.space.app.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/login")
@@ -60,12 +62,14 @@ public class LoginController {
     }
 
     @PostMapping("/login") // 로그인 버튼을 눌렀을 때
-    public String login(String id, String pw, String toURL, boolean rememberId, HttpServletRequest request,
-                        HttpServletResponse response, RedirectAttributes rattr) {
+    public String login(String id, String pw, String toURL, Model m, boolean rememberId, HttpServletRequest request,
+                        HttpServletResponse response ) throws Exception {
         
         // 아이디와 비밀번호가 데이터 베이스와 일치하는지 검증
         if(!loginCheck(id, pw)) {
-            rattr.addFlashAttribute("msg", "INFO_ERR");
+            // 2-1   일치하지 않으면, loginForm으로 이동
+            m.addAttribute("msg", "회원정보가 일치하지 않습니다");
+//            String msg = URLEncoder.encode("회원정보가 일치하지 않습니다.", "utf-8");
             return "redirect:/login/login";
         }
 
@@ -80,7 +84,7 @@ public class LoginController {
         } else {
             // 체크박스가 false일 경우 쿠키의 유효기간을 0으로 변경(폐기).
             Cookie cookie = new Cookie("id", id);
-            cookie.setMaxAge(0);
+//            cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
 
@@ -100,10 +104,10 @@ public class LoginController {
         return user!=null && user.getPw().equals(pw);
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logout") // 로그아웃 버튼을 눌렀을 때
     public String logout(HttpSession session){
         session.invalidate();
-        return "redirect:/";
+        return "redirect:/login/login";
     }
 
 

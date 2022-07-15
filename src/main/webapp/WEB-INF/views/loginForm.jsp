@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
 <c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '비회원' : pageContext.request.session.getAttribute('id')}"/>
-<c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
 <c:set var="loginOut" value="${loginId=='비회원' ? '로그인' : '로그아웃'}"/>
+<c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +47,8 @@
                 <h1 class="login-title">LOGIN</h1>
                 <div id="msg" class="msg">
                     <c:if test="${not empty param.msg}">
-                        <i>${URLDecoder.decode(param.msg)}</i>
+<%--                        <i class="fa fa-exclamation-circle"> ${URLDecoder.decode(param.msg)}</i>--%>
+                        <i>${param.msg}</i>
                     </c:if>
                 </div><!--.msg-->
                 <div class="login-input">
@@ -57,7 +58,7 @@
                 </div><!--.login-input-->
                 <button class="login-btn">로그인</button>
                 <div class="login-others">
-                    <label><input type="checkbox" name="rememberId" ${empty cookie.id.value ? "":"checked"}> [아이디 기억]</label>
+                    <label><input type="checkbox" name="rememberId" value="on" ${empty cookie.id.value ? "":"checked"}> [아이디 기억]</label>
                     <a class="login-other-margin" href="#">[ID/PW찾기]</a>
                     <a href="<c:url value='/login/join'/>">[회원가입]</a>
                 </div><!--.login-others-->
@@ -70,6 +71,24 @@
 <script>
     let msg = "${msg}";
     if(msg=="JOIN_OK") alert("회원가입에 성공했습니다!");
+    if(msg=="JOIN_ERR") alert("회원가입에 실패했습니다 다시 시도해주세요.");
+</script>
+<script>
+    function formCheck(frm) {
+        let msg ='';
+        if(frm.id.value.length==0 || frm.pw.value.length==0) {
+            setMessage('로그인 정보에 공백이 있습니다!', frm.id);
+            return false;
+        }
+        return true;
+    }
+    // 메세지를 저장하는 함수
+    function setMessage(msg, element){
+        document.getElementById("msg").innerHTML = ` ${'${msg}'}`;
+        if(element) {
+            element.select();
+        }
+    }
 </script>
 </body>
 </html>
