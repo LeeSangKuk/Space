@@ -81,10 +81,10 @@ public class LoginController {
         if(rememberId){
             Cookie cookie = new Cookie("id", id);
             response.addCookie(cookie);
-        } else {
+        } else if(rememberId==false){
             // 체크박스가 false일 경우 쿠키의 유효기간을 0으로 변경(폐기).
             Cookie cookie = new Cookie("id", id);
-//            cookie.setMaxAge(0);
+            cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
 

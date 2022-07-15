@@ -47,7 +47,6 @@
                 <h1 class="login-title">LOGIN</h1>
                 <div id="msg" class="msg">
                     <c:if test="${not empty param.msg}">
-<%--                        <i class="fa fa-exclamation-circle"> ${URLDecoder.decode(param.msg)}</i>--%>
                         <i>${param.msg}</i>
                     </c:if>
                 </div><!--.msg-->
