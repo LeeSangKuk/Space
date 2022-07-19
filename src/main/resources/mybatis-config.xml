@@ -5,5 +5,6 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="UserDTO" type="com.space.app.domain.UserDTO"/>
+        <typeAlias alias="BoardDTO" type="com.space.app.domain.BoardDTO"/>
     </typeAliases>
 </configuration>

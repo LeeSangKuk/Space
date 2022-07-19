@@ -41,7 +41,7 @@
     <!-- =======================================header============================================= -->
 
     <section id="container"><!--section/start-->
-        <div class="section1"><a href="#"></a></div>
+        <div class="section1"><a href="<c:url value='/board/list'/>"></a></div>
         <div class="section2"><a href="#"></a></div>
         <div class="section3"><a href="#"></a></div>
         <div class="section4"><a href="#"></a></div>
