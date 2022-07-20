@@ -16,4 +16,7 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardDTO> getList() {
         return boardDAO.selectAll();
     }
+
+    @Override
+    public int write(BoardDTO boardDTO) { return boardDAO.insert(boardDTO); }
 }

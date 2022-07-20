@@ -106,6 +106,14 @@ img{
     color: brown;
 }
 
+.nav-user-login>a:hover {
+    color: green;
+}
+
+.nav-user-join>a:hover {
+    color: green;
+}
+
 /* =====================header end======================= */
 
 #container {

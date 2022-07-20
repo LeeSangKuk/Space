@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
 <c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '비회원' : pageContext.request.session.getAttribute('id')}"/>
+<c:set var="loginId" value="${pageContext.request.getSession(true)==null ? pageContext.request.session.getAttribute('id') : '비회원'}"/>
 <c:set var="loginOut" value="${loginId=='비회원' ? '로그인' : '로그아웃'}"/>
-<c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
+<c:set var="loginOutLink" value="${loginId=='비회원' ? '/login/login' : '/login/logout'}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>

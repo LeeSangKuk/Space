@@ -111,6 +111,14 @@ label, input {
     color: brown;
 }
 
+.nav-user-login>a:hover {
+    color: green;
+}
+
+.nav-user-join>a:hover {
+    color: green;
+}
+
 .main-join {
     width: 1240px;
     height: auto;

@@ -106,6 +106,14 @@ img{
     color: brown;
 }
 
+.nav-user-login>a:hover {
+    color: green;
+}
+
+.nav-user-join>a:hover {
+    color: green;
+}
+
 /* =====================header end======================= */
 
 .board-container {
@@ -169,6 +177,11 @@ img{
 }
 .search-button:hover {
     color: rgb(165, 165, 165);
+}
+.btn-write {
+    width: 10%;
+    height: 35%;
+    margin-left: 10px;
 }
 
 table {

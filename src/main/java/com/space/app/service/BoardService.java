@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BoardService {
     List<BoardDTO> getList();
+    int write(BoardDTO boardDTO);
 }

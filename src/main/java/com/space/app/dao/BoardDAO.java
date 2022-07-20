@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BoardDAO {
     List<BoardDTO> selectAll();
+    int insert(BoardDTO boardDTO);
 }

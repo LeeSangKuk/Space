@@ -6,4 +6,8 @@
     <select id="selectAll" resultType="BoardDTO">
         SELECT * FROM board;
     </select>
+    <insert id="insert" parameterType="BoardDTO">
+        INSERT board (title, writer, content)
+        VALUES (#{title}, #{writer}, #{content});
+    </insert>
 </mapper>
