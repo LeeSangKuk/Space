@@ -64,7 +64,7 @@
             <c:forEach var="boardDTO" items="${list}">
                 <tr>
                 <td class="no">${boardDTO.bno}</td>
-                <td class="title">${boardDTO.title}</td>
+                <td class="title"><a href="<c:url value="/board/read?bno=${boardDTO.bno}"/>">${boardDTO.title}</a></td>
                 <td class="writer">${boardDTO.writer}</td>
                 <td class="regdate"><fmt:formatDate value="${boardDTO.reg_date}" pattern="yyyy-MM-dd" type="date"/></td>
                 <td class="viewcnt">${boardDTO.view_cnt}</td>

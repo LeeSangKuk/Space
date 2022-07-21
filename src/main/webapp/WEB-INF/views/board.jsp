@@ -63,7 +63,9 @@
     </footer><!--footer/end-->
 </div><!--#wrap-->
 <script>
+    // 메인 스크립트
     $(document).ready(function(){
+        // #writeBtn 버튼을 눌렀을 때-----------------------------
         $("#writeBtn").on("click", function(){
             let form = $("#form");
             form.attr("action", "<c:url value='/board/write'/>");
@@ -71,8 +73,24 @@
             if(formCheck())
                 form.submit();
         });
+        // #listBtn 버튼을 눌렀을 때-------------------------------
+        $("#listBtn").on("click", function(){
+            location.href="<c:url value='/board/list'/>";
+        });
+        // modifyBtn 버튼을 눌렀을 때------------------------------
+        $("#modifyBtn").on("click", function(){
+        });
+        // removeBtn 버튼을 눌렀을 때------------------------------
+        $("#removeBtn").on("click", function(){
+            if(!confirm("정말로 삭제하시겠습니까?")) return;
+            let form = $("#form");
+            form.attr("action", "<c:url value='/board/remove?bno=${boardDTO.bno}'/>");
+            form.attr("method", "post");
+            form.submit();
+        });
     })
 
+    // 로그인 박스 공백 체크
     let formCheck = function() {
         let form = document.getElementById("form");
         if(form.title.value=="") {

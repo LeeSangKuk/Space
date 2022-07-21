@@ -19,4 +19,17 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int write(BoardDTO boardDTO) { return boardDAO.insert(boardDTO); }
+
+    @Override
+    public BoardDTO read(Integer bno) {
+        BoardDTO boardDTO = boardDAO.select(bno);
+        boardDAO.increaseViewCnt(bno);
+        return boardDTO;
+    }
+
+    @Override
+    public int remove(Integer bno, String writer) {
+        return boardDAO.delete(bno, writer);
+    }
+
 }

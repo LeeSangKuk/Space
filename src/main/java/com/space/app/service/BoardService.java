@@ -7,4 +7,6 @@ import java.util.List;
 public interface BoardService {
     List<BoardDTO> getList();
     int write(BoardDTO boardDTO);
+    BoardDTO read(Integer bno);
+    int remove(Integer bno, String writer);
 }

@@ -37,13 +37,13 @@ public class BoardContorller {
         return session.getAttribute("id")!=null;
     }
 
-    @GetMapping("/write")
+    @GetMapping("/write") // 글쓰기 페이지
     public String write(Model m){
         m.addAttribute("mode", "new");
         return "board";
     }
 
-    @PostMapping("/write")
+    @PostMapping("/write") // 게시글 작성
     public String write(BoardDTO boardDTO, HttpSession session, RedirectAttributes rattr){
         String writer = (String) session.getAttribute("id");
         boardDTO.setWriter(writer);
@@ -52,5 +52,30 @@ public class BoardContorller {
         bs.write(boardDTO);
         return "redirect:/board/list";
     }
+
+    @GetMapping("/read") // 게시글 읽기
+    public String read(Integer bno, Model m){
+        BoardDTO boardDTO = bs.read(bno);
+        m.addAttribute("boardDTO", boardDTO);
+        return "board";
+    }
+
+    @PostMapping("/remove")
+    public String remove(Integer bno, RedirectAttributes rattr, HttpSession session){
+        String writer = (String)session.getAttribute("id");
+        try {
+            int rowCnt = bs.remove(bno, writer);
+            if(rowCnt!=1)
+                throw new Exception("board remove error");
+
+            rattr.addFlashAttribute("msg", "DEL_OK");
+        } catch (Exception e) {
+            e.printStackTrace();
+            rattr.addFlashAttribute("msg", "DEL_ERR");
+        }
+        return "redirect:/board/list";
+    }
+
+
 
 }// BoardController
