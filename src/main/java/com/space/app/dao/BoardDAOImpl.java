@@ -30,6 +30,9 @@ public class BoardDAOImpl implements BoardDAO {
     public int increaseViewCnt(Integer bno) { return session.update(board+"increaseViewCnt"); }
 
     @Override
+    public int update(BoardDTO boardDTO) { return session.update(board+"update", boardDTO); }
+
+    @Override
     public int delete(Integer bno, String writer) {
         Map map = new HashMap();
         map.put("bno", bno);

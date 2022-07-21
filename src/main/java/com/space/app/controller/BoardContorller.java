@@ -60,7 +60,26 @@ public class BoardContorller {
         return "board";
     }
 
-    @PostMapping("/remove")
+    @PostMapping("/modify") // 게시글 수정
+    public String modify(BoardDTO boardDTO, Model m, HttpSession session, RedirectAttributes rattr){
+        String writer = (String) session.getAttribute("id");
+        boardDTO.setWriter(writer);
+        try {
+            int rowCnt = bs.modify(boardDTO);
+            if(rowCnt!=1)
+                throw new Exception("Modify Failed");
+
+            rattr.addFlashAttribute("msg", "MOD_OK");
+            return "redirect:/board/list";
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("boardDTO", boardDTO);
+            rattr.addFlashAttribute("msg", "MOD_ERR");
+            return "board";
+        }
+    }
+
+    @PostMapping("/remove") // 게시글 삭제
     public String remove(Integer bno, RedirectAttributes rattr, HttpSession session){
         String writer = (String)session.getAttribute("id");
         try {
