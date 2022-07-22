@@ -1,6 +1,8 @@
 package com.space.app.controller;
 
 import com.space.app.domain.BoardDTO;
+import com.space.app.domain.PageHandler;
+import com.space.app.domain.SearchCondition;
 import com.space.app.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,17 @@ public class BoardContorller {
     BoardService bs;
 
     @GetMapping("/list") // 게시글 목록
-    public String list(Model m, HttpServletRequest request){
+    public String list(SearchCondition sc, Model m, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login/login?toURL=" + request.getRequestURL();
 
-        List<BoardDTO> list = bs.getList();
+        int totalCnt = bs.getSearchResultCnt(sc);
+        PageHandler pageHandler = new PageHandler(totalCnt, sc);
+
+        List<BoardDTO> list = bs.getSearchResultPage(sc);
+        m.addAttribute("totalCnt", totalCnt);
         m.addAttribute("list", list);
+        m.addAttribute("ph", pageHandler);
 
         return "boardList";
     }
@@ -48,50 +55,47 @@ public class BoardContorller {
         String writer = (String) session.getAttribute("id");
         boardDTO.setWriter(writer);
 
+        int rowCnt = bs.write(boardDTO);
+        if(rowCnt!=1)        // 글쓰기가 실패한다면
+            rattr.addFlashAttribute("msg", "WRT_ERR");
+
         rattr.addFlashAttribute("msg", "WRT_OK");
-        bs.write(boardDTO);
         return "redirect:/board/list";
     }
 
     @GetMapping("/read") // 게시글 읽기
-    public String read(Integer bno, Model m){
+    public String read(Integer bno, SearchCondition sc, Model m){
         BoardDTO boardDTO = bs.read(bno);
         m.addAttribute("boardDTO", boardDTO);
+        m.addAttribute("sc", sc);
         return "board";
     }
 
     @PostMapping("/modify") // 게시글 수정
-    public String modify(BoardDTO boardDTO, Model m, HttpSession session, RedirectAttributes rattr){
+    public String modify(BoardDTO boardDTO, SearchCondition sc, Model m, HttpSession session, RedirectAttributes rattr){
         String writer = (String) session.getAttribute("id");
         boardDTO.setWriter(writer);
-        try {
-            int rowCnt = bs.modify(boardDTO);
-            if(rowCnt!=1)
-                throw new Exception("Modify Failed");
 
-            rattr.addFlashAttribute("msg", "MOD_OK");
-            return "redirect:/board/list";
-        } catch (Exception e) {
-            e.printStackTrace();
+        int rowCnt = bs.modify(boardDTO);
+        if(rowCnt!=1){            // 수정이 실패한다면
             m.addAttribute("boardDTO", boardDTO);
             rattr.addFlashAttribute("msg", "MOD_ERR");
             return "board";
         }
+        rattr.addFlashAttribute("sc", sc);
+        rattr.addFlashAttribute("msg", "MOD_OK");
+        return "redirect:/board/list";
     }
 
     @PostMapping("/remove") // 게시글 삭제
-    public String remove(Integer bno, RedirectAttributes rattr, HttpSession session){
+    public String remove(Integer bno, SearchCondition sc, RedirectAttributes rattr, HttpSession session){
         String writer = (String)session.getAttribute("id");
-        try {
-            int rowCnt = bs.remove(bno, writer);
-            if(rowCnt!=1)
-                throw new Exception("board remove error");
-
-            rattr.addFlashAttribute("msg", "DEL_OK");
-        } catch (Exception e) {
-            e.printStackTrace();
+        int rowCnt = bs.remove(bno, writer);
+        if(rowCnt!=1)            // 삭제가 싫패한다면
             rattr.addFlashAttribute("msg", "DEL_ERR");
-        }
+
+        rattr.addFlashAttribute("sc", sc);
+        rattr.addFlashAttribute("msg", "DEL_OK");
         return "redirect:/board/list";
     }
 

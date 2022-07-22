@@ -204,9 +204,34 @@ td {
 }
 .no      { width:150px;}
 .title   { width:50%;  }
-td.title   { text-align: left;  }
-td.writer  { text-align: left;  }
-td.viewcnt { text-align: right; }
+td.title   { text-align: center;  }
+td.writer  { text-align: center;  }
+td.viewcnt { text-align: center; }
 td.title:hover {
     text-decoration: underline;
+}
+
+.paging-container {
+    position: fixed;
+    bottom: 30%;
+    display: flex;
+    width:100%;
+    height: 70px;
+    margin: 100px auto 0 auto;
+}
+
+.paging {
+    color: black;
+    width: 100%;
+    align-items: center;
+}
+.page {
+    color: black;
+    padding: 6px;
+    margin-right: 10px;
+}
+.paging-active {
+    border-radius: 5px;
+    color: rgb(24, 24, 24);
+    background-color: rgb(216, 216, 216);
 }

@@ -2,6 +2,7 @@ package com.space.app.service;
 
 import com.space.app.dao.BoardDAO;
 import com.space.app.domain.BoardDTO;
+import com.space.app.domain.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,11 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
     @Autowired
     BoardDAO boardDAO;
+
+    @Override
+    public int getCount(){
+        return boardDAO.count();
+    }
 
     @Override
     public List<BoardDTO> getList() {
@@ -33,6 +39,15 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public int remove(Integer bno, String writer) {
         return boardDAO.delete(bno, writer);
+    }
+
+    @Override
+    public int getSearchResultCnt(SearchCondition sc){
+        return boardDAO.searchResultCnt(sc);
+    }
+
+    public List<BoardDTO> getSearchResultPage(SearchCondition sc){
+        return boardDAO.searchSelectPage(sc);
     }
 
 }

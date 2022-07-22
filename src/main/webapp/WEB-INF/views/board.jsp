@@ -75,7 +75,7 @@
         });
         // #listBtn 버튼을 눌렀을 때-------------------------------
         $("#listBtn").on("click", function(){
-            location.href="<c:url value='/board/list'/>";
+            location.href="<c:url value='/board/list${sc.queryString}'/>";
         });
         // modifyBtn 버튼을 눌렀을 때------------------------------
         $("#modifyBtn").on("click", function(){
@@ -92,18 +92,18 @@
             }
 
             // 2. 수정 상태이면, 수정된 내용을 서버로 전송
-            form.attr("action", "<c:url value='/board/modify?bno=${boardDTO.bno}'/>");
+            form.attr("action", "<c:url value='/board/modify${sc.queryString}'/>");
             form.attr("method", "post");
 
             // 3. 게시판 공백 다시 학인 후 제출
             if(formCheck())
                 form.submit();
         })
-        // removeBtn 버튼을 눌렀을 때------------------------------
+        // 3. removeBtn 버튼을 눌렀을 때------------------------------
         $("#removeBtn").on("click", function(){
             if(!confirm("정말로 삭제하시겠습니까?")) return;
             let form = $("#form");
-            form.attr("action", "<c:url value='/board/remove?bno=${boardDTO.bno}'/>");
+            form.attr("action", "<c:url value='/board/remove${sc.queryString}'/>");
             form.attr("method", "post");
             form.submit();
         });
